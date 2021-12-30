@@ -1,5 +1,5 @@
 Name:       tau-logos
-Version:    18.0.1
+Version:    35.0.0
 Release:    7%{?dist}
 Summary:    Logos and Anaconda Brand for tauOS
 
