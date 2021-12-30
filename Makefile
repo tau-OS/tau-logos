@@ -15,12 +15,10 @@ tag:
 	@echo "Tagged as $(TAG)"
 
 archive: tag
-	@git archive --format=tar --prefix=$(NAME)-$(VERSION)/ HEAD > $(NAME)-$(VERSION).tar
-	@bzip2 -f $(NAME)-$(VERSION).tar
-	@echo "$(NAME)-$(VERSION).tar.bz2 created" 
-	@sha1sum $(NAME)-$(VERSION).tar.bz2 > $(NAME)-$(VERSION).sha1sum 
-	@scp $(NAME)-$(VERSION).tar.bz2 $(NAME)-$(VERSION).sha1sum fedorahosted.org:$(NAME) || scp $(NAME)-$(VERSION).tar.bz2 $(NAME)-$(VERSION).sha1sum fedorahosted.org:/srv/web/releases/g/e/generic-logos/
-	@echo "Everything done, files uploaded to Fedorahosted.org" 
+	@git archive --format=tar --prefix=$(NAME)-$(VERSION)/ HEAD > $(TAG).tar
+	@gzip -f $(TAG).tar
+	@echo "$(TAG).tar.gz created" 
+	@sha1sum $(TAG).tar.gz > $(TAG).sha1sum
 
 clean:
 	rm -f *~ *bz2 bootloader/fedora.icns

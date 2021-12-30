@@ -1,0 +1,3 @@
+# Built tarfiles
+*.tar.gz
+*.sha1sum
