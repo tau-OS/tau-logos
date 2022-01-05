@@ -34,6 +34,7 @@ Logos and Anaconda Brand for tauOS.
 Summary: Fedora-related icons and pictures used by httpd
 Provides: system-logos-httpd = %{version}-%{release}
 Provides: fedora-logos-httpd = %{version}-%{release}
+Provides: system-logos(httpd-logo-ng)
 Conflicts:  fedora-logos-httpd
 Obsoletes:  generic-logos < 17.0.0-5
 BuildArch: noarch
