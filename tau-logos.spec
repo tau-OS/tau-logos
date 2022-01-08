@@ -1,27 +1,28 @@
-Name:       tau-logos
-Version:    35.0.0
-Release:    7%{?dist}
-Summary:    Logos and Anaconda Brand for tauOS
+Name:         tau-logos
+Version:      35.0.0
+Release:      7%{?dist}
+Summary:      Logos and Anaconda Brand for tauOS
 
-Group:      	System Environment/Base
-URL:        	https://github.com/tauLinux/%{name}
+Group:        System Environment/Base
+URL:          https://github.com/tauLinux/%{name}
 # TODO strip the dist from the release and use that
-Source0:    	https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-7.tar.gz
-License:    	GPLv2 and LGPLv2+
-BuildRoot:  	%{_tmppath}/%{name}
-BuildArch:  	noarch
+Source0:      https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-7.tar.gz
+License:      GPLv2 and LGPLv2+
+BuildRoot:    %{_tmppath}/%{name}
+BuildArch:    noarch
 
-Obsoletes:  redhat-logos
-Obsoletes:  generic-logos < 17.0.0-5
-Provides:   redhat-logos = %{version}-%{release}
-Provides:   system-logos = %{version}-%{release}
-Provides:   fedora-logos < %{version}
+Obsoletes:    generic-logos < 17.0.0-5
+Provides:     redhat-logos = %{version}-%{release}
+Provides:     system-logos = %{version}-%{release}
+Provides:     fedora-logos < %{version}
 
-Conflicts:  fedora-logos
-Conflicts:  anaconda-images <= 10
-Conflicts:  redhat-artwork <= 5.0.5
-BuildRequires: hardlink
-BuildRequires: 	make
+Conflicts:      fedora-logos
+Conflicts:      anaconda-images <= 10
+Conflicts:      redhat-artwork <= 5.0.5
+BuildRequires:  hardlink
+BuildRequires:  make
+# For _kde4_* macros:
+BuildRequires: kde-filesystem
 # For generating the EFI icon
 BuildRequires: libicns-utils
 Requires(post): coreutils
@@ -34,7 +35,7 @@ Logos and Anaconda Brand for tauOS.
 Summary: Fedora-related icons and pictures used by httpd
 Provides: system-logos-httpd = %{version}-%{release}
 Provides: fedora-logos-httpd = %{version}-%{release}
-Provides: system-logos(httpd-logo-ng)
+Provides: system-logos(httpd-logo-ng) = %{version}-%{release}
 Conflicts:  fedora-logos-httpd
 Obsoletes:  generic-logos < 17.0.0-5
 BuildArch: noarch
@@ -66,6 +67,9 @@ for i in pixmaps/* ; do
   install -p -m 644 $i %{buildroot}%{_datadir}/pixmaps
 done
 
+mkdir -p %{buildroot}%{_kde4_iconsdir}/oxygen/48x48/apps/
+install -p -m 644 icons/hicolor/48x48/apps/* %{buildroot}%{_kde4_iconsdir}/oxygen/48x48/apps/
+ 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/charge/
 for i in plymouth/charge/* ; do
     install -p -m 644 $i $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/charge/
@@ -75,28 +79,31 @@ done
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
 install -p -m 644 icons/hicolor/48x48/apps/* %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
-install	-p -m 644 icons/hicolor/scalable/apps/* %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
+install -p -m 644 icons/hicolor/scalable/apps/* %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
 
 (cd anaconda; make DESTDIR=%{buildroot} install)
 
 # Plymouth logo
 # The Plymoth spinner theme Fedora logo bits
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/spinner
-# Not sure why this is here
-#install -p -m 644 pixmaps/fedora-gdm-logo.png $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/spinner/watermark.png
 
 # save some dup'd icons
 hardlink -v %{buildroot}/
 
 %post
 touch --no-create %{_datadir}/icons/hicolor || :
+touch --no-create %{_kde4_iconsdir}/oxygen ||:
 
 %postun
 if [ $1 -eq 0 ] ; then
 touch --no-create %{_datadir}/icons/hicolor || :
+touch --no-create %{_kde4_iconsdir}/oxygen ||:
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
   if [ -f %{_datadir}/icons/hicolor/index.theme ]; then
     gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+  fi
+  if [ -f %{_kde4_iconsdir}/tauOS-KDE/index.theme ]; then
+    gtk-update-icon-cache --quiet %{_kde4_iconsdir}/tauOS-KDE/index.theme || :
   fi
 fi
 fi
@@ -105,6 +112,9 @@ fi
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
   if [ -f %{_datadir}/icons/hicolor/index.theme ]; then
     gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+  fi
+  if [ -f %{_kde4_iconsdir}/oxygen/index.theme ]; then
+    gtk-update-icon-cache --quiet %{_kde4_iconsdir}/oxygen/index.theme || :
   fi
 fi
 
@@ -122,6 +132,7 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 %exclude %{_datadir}/pixmaps/poweredby.png
 %{_datadir}/plymouth/themes/charge/*
+%{_kde4_iconsdir}/oxygen/
 
 %files httpd
 %doc COPYING
