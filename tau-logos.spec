@@ -1,3 +1,6 @@
+# change this, this is for "provides" and shit
+%define dist_version 37
+
 Name:         tau-logos
 Version:      35.0.0
 Release:      7%{?dist}
@@ -12,9 +15,9 @@ BuildRoot:    %{_tmppath}/%{name}
 BuildArch:    noarch
 
 Obsoletes:    generic-logos < 17.0.0-5
-Provides:     redhat-logos = %{version}-%{release}
-Provides:     system-logos = %{version}-%{release}
-Provides:     fedora-logos < %{version}
+Provides:     redhat-logos <= %{dist_version}-%{release}
+Provides:     system-logos <= %{dist_version}-%{release}
+Provides:     fedora-logos <= %{dist_version}
 
 Conflicts:      fedora-logos
 Conflicts:      anaconda-images <= 10
@@ -117,10 +120,6 @@ if [ -x /usr/bin/gtk-update-icon-cache ]; then
     gtk-update-icon-cache --quiet %{_kde4_iconsdir}/oxygen/index.theme || :
   fi
 fi
-
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
