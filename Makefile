@@ -1,4 +1,4 @@
-NAME = tau-logos
+NAME = tau-logos-enterprise
 XML = backgrounds/desktop-backgrounds-fedora.xml
 
 all: bootloader/fedora.icns

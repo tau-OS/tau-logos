@@ -3,15 +3,15 @@ Version:    35.0.0
 Release:    7%{?dist}
 Summary:    Logos and Anaconda Brand for tauOS Enterprise
 
-Group:      	System Environment/Base
-URL:        	https://github.com/tauLinux/%{name}
+Group:        System Environment/Base
+URL:          https://github.com/tauLinux/%{name}
 # TODO strip the dist from the release and use that
-Source0:    	https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-7.tar.gz
-License:    	GPLv2 and LGPLv2+
-BuildRoot:  	%{_tmppath}/%{name}
-BuildArch:  	noarch
+Source0:      https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-7.tar.gz
+License:      GPLv2 and LGPLv2+
+BuildRoot:    %{_tmppath}/%{name}
+BuildArch:    noarch
 
-Obsoletes:  redhat-logos
+Obsoletes:  redhat-logos = %{version}-%{release}
 Obsoletes:  generic-logos < 17.0.0-5
 Provides:   redhat-logos = %{version}-%{release}
 Provides:   system-logos = %{version}-%{release}
@@ -21,8 +21,8 @@ Provides:   almalinux-logos < %{version}
 Conflicts:  almalinux-logos
 Conflicts:  anaconda-images <= 10
 Conflicts:  redhat-artwork <= 5.0.5
-BuildRequires: hardlink
-BuildRequires: 	make
+BuildRequires:  hardlink
+BuildRequires:  make
 # For generating the EFI icon
 BuildRequires: libicns-utils
 Requires(post): coreutils
@@ -75,15 +75,13 @@ done
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
 install -p -m 644 icons/hicolor/48x48/apps/* %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
-install	-p -m 644 icons/hicolor/scalable/apps/* %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
+install -p -m 644 icons/hicolor/scalable/apps/* %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
 
 (cd anaconda; make DESTDIR=%{buildroot} install)
 
 # Plymouth logo
 # The Plymoth spinner theme Fedora logo bits
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/spinner
-# Not sure why this is here
-#install -p -m 644 pixmaps/fedora-gdm-logo.png $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/spinner/watermark.png
 
 # save some dup'd icons
 hardlink -v %{buildroot}/
@@ -107,10 +105,6 @@ if [ -x /usr/bin/gtk-update-icon-cache ]; then
     gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
   fi
 fi
-
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
