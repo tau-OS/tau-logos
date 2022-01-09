@@ -1,12 +1,13 @@
 Name:       tau-logos-enterprise
-Version:    35.0.0
-Release:    7%{?dist}
+Version:    22
+# In the future, replace this with the dist macro
+Release:    7.el8 
 Summary:    Logos and Anaconda Brand for tauOS Enterprise
 
 Group:        System Environment/Base
 URL:          https://github.com/tauLinux/%{name}
 # TODO strip the dist from the release and use that
-Source0:      https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-7.tar.gz
+Source0:      https://github.com/tauLinux/%{name}/archive/refs/tags/%{name}-%{version}-%{release}.tar.gz
 License:      GPLv2 and LGPLv2+
 BuildRoot:    %{_tmppath}/%{name}
 BuildArch:    noarch
