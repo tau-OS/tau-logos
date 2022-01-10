@@ -1,6 +1,3 @@
-# change this, this is for "provides" and shit
-%define dist_version 37
-
 Name:         tau-logos
 Version:      35.0.0
 Release:      7%{?dist}
@@ -15,9 +12,9 @@ BuildRoot:    %{_tmppath}/%{name}
 BuildArch:    noarch
 
 Obsoletes:    generic-logos < 17.0.0-5
-Provides:     redhat-logos <= %{dist_version}-%{release}
-Provides:     system-logos <= %{dist_version}-%{release}
-Provides:     fedora-logos <= %{dist_version}
+Provides:     redhat-logos = %{version}-%{release}
+Provides:     system-logos = %{version}-%{release}
+Provides:     fedora-logos = %{version}
 
 Conflicts:      fedora-logos
 Conflicts:      anaconda-images <= 10
