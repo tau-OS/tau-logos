@@ -12,6 +12,6 @@ build-job:
     - sudo dnf install -y kde-filesystem libicns-utils coreutils hardlink
   variables:
     PACKAGE_VERSION: "1.0.0"
-    PACKAGE_NAME: "tau-release"
+    PACKAGE_NAME: "tau-logos"
     PACKAGE_ARCH: "noarch"
   extends: .build
