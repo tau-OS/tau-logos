@@ -30,8 +30,8 @@ install:
 
 	install -m 644 anaconda-gtk.css $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
 
-	for i in desktop ; do
-  		cp -a $i $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/
+	for i in desktop ; do \
+  		cp -a $i $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/; \
 	done
 
 clean:
