@@ -39,24 +39,10 @@ AnacondaSpokeWindow #nav-box GtkButton {
     box-shadow: none;
 }
 
-
-/* Change the sidebar background color */
-.logo-sidebar {
-  background-color: #F5C211;
-}
-
-AnacondaSpokeWindow #nav-box {
-  background-color: #F5C211;
-}
-
-/* Move the Fedora logo to the bottom */
-.logo {
-    background-position: 50% 90%;
-}
-
 /* Add the product logo at the top */
 .product-logo {
-    background-image: url('/usr/share/anaconda/pixmaps/sidebar-logo.png');
+    /* background-image: url('/usr/share/anaconda/pixmaps/anaconda_header.png'); */
+    background-image: none;
     background-position: 12px 10.5em;
     background-repeat: no-repeat;
 }
