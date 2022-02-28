@@ -28,5 +28,7 @@ install:
 	install -m 644 sidebar-bg.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
 	install -m 644 topbar-bg.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
 
+	install -m 644 anaconda-gtk.css $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
+
 clean:
 	rm -f splash.lss
