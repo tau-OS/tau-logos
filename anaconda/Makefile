@@ -25,8 +25,7 @@ install:
 	install -m 644 syslinux-vesa-splash.png $(DESTDIR)/$(ANACONDABOOTDIR)/splash.png
 
 	install -m 644 sidebar-logo.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
-	install -m 644 sidebar-bg.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
-	install -m 644 topbar-bg.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
+	install -m 644 topbar-bg.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/sidebar-bg.png
 
 	install -m 644 anaconda-gtk.css $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
 
