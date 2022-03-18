@@ -1,6 +1,6 @@
 %bcond_with kde
 
-%define dist_version 35
+%define dist_version 36
 
 Name:         tau-logos
 Version:      1.0.0
