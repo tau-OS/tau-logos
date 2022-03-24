@@ -1,10 +1,10 @@
 %bcond_with kde
 
-%define dist_version 35
+%define dist_version 36
 
 Name:         tau-logos
-Version:      1.0.0
-Release:      1%{?dist}
+Version:      1.1
+Release:      0%{?dist}
 Summary:      Logos and Anaconda Brand for tauOS
 
 Group:        System Environment/Base
@@ -152,6 +152,9 @@ fi
 %{_datadir}/pixmaps/poweredby.png
 
 %changelog
+* Wed Mar 23 2022 Jamie Lee <jamie@innatical.com> - 1.1-0
+- Update for Fedora 36
+
 * Sun Nov 13 2016 Bill Nottingham <notting@splat.cc> - 18.0.0-1
 - update boot file definition, add anconda sidebar/topbar logos
 
