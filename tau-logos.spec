@@ -1,35 +1,31 @@
-%bcond_with kde
-
 %define dist_version 36
 
-Name:         tau-logos
-Version:      1.1
-Release:      0%{?dist}
-Summary:      Logos and Anaconda Brand for tauOS
+Name:           tau-logos
+Version:        1.1
+Release:        1%{?dist}
+Summary:        Logos and Anaconda Brand for tauOS
 
-Group:        System Environment/Base
-URL:          https://tauos.co
-Source0:      %{name}-%{version}.tar.gz
-License:      GPLv2 and LGPLv2+
-BuildRoot:    %{_tmppath}/%{name}
-BuildArch:    noarch
+Group:          System Environment/Base
+URL:            https://tauos.co
+Source0:        %{name}-%{version}.tar.gz
+BuildRequires:  hardlink
+BuildRequires:  make
+# For generating the EFI icon
+BuildRequires:  libicns-utils
 
-Obsoletes:    generic-logos < 17.0.0-5
-Provides:     redhat-logos = %{dist_version}-%{release}
-Provides:     system-logos = %{dist_version}-%{release}
-Provides:     fedora-logos = %{dist_version}
+License:        GPLv2 and LGPLv2+
+BuildRoot:      %{_tmppath}/%{name}
+BuildArch:      noarch
+
+Obsoletes:      generic-logos < 17.0.0-5
+Provides:       redhat-logos = %{dist_version}-%{release}
+Provides:       system-logos = %{dist_version}-%{release}
+Provides:       fedora-logos = %{dist_version}
 
 Conflicts:      fedora-logos
 Conflicts:      anaconda-images <= 10
 Conflicts:      redhat-artwork <= 5.0.5
-BuildRequires:  hardlink
-BuildRequires:  make
-%if %{with kde}
-# For _kde4_* macros:
-BuildRequires: kde-filesystem
-%endif
-# For generating the EFI icon
-BuildRequires: libicns-utils
+
 Requires(post): coreutils
 
 %description
@@ -72,11 +68,6 @@ for i in pixmaps/* ; do
   install -p -m 644 $i %{buildroot}%{_datadir}/pixmaps
 done
 
-%if %{with kde}
-mkdir -p %{buildroot}%{_kde4_iconsdir}/oxygen/48x48/apps/
-install -p -m 644 icons/hicolor/48x48/apps/* %{buildroot}%{_kde4_iconsdir}/oxygen/48x48/apps/
-%endif 
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/charge/
 for i in plymouth/charge/* ; do
     install -p -m 644 $i $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/charge/
@@ -99,25 +90,14 @@ hardlink -v %{buildroot}/
 
 %post
 touch --no-create %{_datadir}/icons/hicolor || :
-%if %{with kde}
-touch --no-create %{_kde4_iconsdir}/oxygen ||:
-%endif 
 
 %postun
 if [ $1 -eq 0 ] ; then
 touch --no-create %{_datadir}/icons/hicolor || :
-%if %{with kde}
-touch --no-create %{_kde4_iconsdir}/oxygen ||:
-%endif 
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
   if [ -f %{_datadir}/icons/hicolor/index.theme ]; then
     gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
   fi
-  %if %{with kde}
-  if [ -f %{_kde4_iconsdir}/tauOS-KDE/index.theme ]; then
-    gtk-update-icon-cache --quiet %{_kde4_iconsdir}/tauOS-KDE/index.theme || :
-  fi
-  %endif 
 fi
 fi
 
@@ -126,16 +106,12 @@ if [ -x /usr/bin/gtk-update-icon-cache ]; then
   if [ -f %{_datadir}/icons/hicolor/index.theme ]; then
     gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
   fi
-  %if %{with kde}
-  if [ -f %{_kde4_iconsdir}/oxygen/index.theme ]; then
-    gtk-update-icon-cache --quiet %{_kde4_iconsdir}/oxygen/index.theme || :
-  fi
-  %endif 
 fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README
+%doc README
+%license COPYING
 %{_datadir}/firstboot/themes/*
 %{_datadir}/anaconda/boot/*
 %{_datadir}/anaconda/pixmaps/*
@@ -143,15 +119,16 @@ fi
 %{_datadir}/pixmaps/*
 %exclude %{_datadir}/pixmaps/poweredby.png
 %{_datadir}/plymouth/themes/charge/*
-%if %{with kde}
-%{_kde4_iconsdir}/oxygen/
-%endif 
 
 %files httpd
 %doc COPYING
 %{_datadir}/pixmaps/poweredby.png
 
 %changelog
+* Sat Apr 23 2022 Jamie Murphy <jamie@fyralabs.com> - 1.1-1
+- Remove KDE
+- Update CI
+
 * Wed Mar 23 2022 Jamie Lee <jamie@innatical.com> - 1.1-0
 - Update for Fedora 36
 
