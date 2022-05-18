@@ -30,7 +30,7 @@ Requires(post): coreutils
 
 %description
 Logos and Anaconda Brand for tauOS.
-(C) 2021 Innatical, LLC
+(C) 2022 Fyra Labs
 
 %package httpd
 Summary: Fedora-related icons and pictures used by httpd
