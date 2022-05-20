@@ -2,7 +2,7 @@
 
 Name:           tau-logos
 Version:        1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Logos and Anaconda Brand for tauOS
 
 Group:          System Environment/Base
