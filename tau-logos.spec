@@ -1,8 +1,8 @@
-%define dist_version 36
+%define dist_version 37
 
 Name:           tau-logos
 Version:        1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Logos and Anaconda Brand for tauOS
 
 Group:          System Environment/Base
@@ -125,6 +125,9 @@ fi
 %{_datadir}/pixmaps/poweredby.png
 
 %changelog
+* Mon Oct 3 2022 Jaiden Riordan <jade@fyralabs.com> - 1.1-3
+- Bump for F37
+
 * Sat Apr 23 2022 Jamie Murphy <jamie@fyralabs.com> - 1.1-1
 - Remove KDE
 - Update CI
