@@ -7,7 +7,7 @@ Summary:        Logos and Anaconda Brand for tauOS
 
 Group:          System Environment/Base
 URL:            https://tauos.co
-Source0:        %{name}-%{version}.tar.gz
+Source0:        https://github.com/tau-OS/tau-logos/archive/refs/heads/main.zip
 BuildRequires:  hardlink
 BuildRequires:  make
 # For generating the EFI icon
