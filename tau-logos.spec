@@ -46,7 +46,7 @@ The tau-logos-httpd package contains image files which can be used by
 httpd.
 
 %prep
-%setup -q
+%setup -q -n tau-logos-main
 %build
 make
 
