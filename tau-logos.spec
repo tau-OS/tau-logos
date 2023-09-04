@@ -1,8 +1,8 @@
-%define dist_version 37
+%define dist_version 39
 
 Name:           tau-logos
-Version:        1.1
-Release:        3%{?dist}
+Version:        1
+Release:        4%{?dist}
 Summary:        Logos and Anaconda Brand for tauOS
 
 Group:          System Environment/Base
@@ -125,6 +125,9 @@ fi
 %{_datadir}/pixmaps/poweredby.png
 
 %changelog
+* Mon Sept 4 2023 Jaiden Riordan <jade@fyralabs.com> - 1-4
+- Bump for F39
+
 * Mon Oct 3 2022 Jaiden Riordan <jade@fyralabs.com> - 1.1-3
 - Bump for F37
 
